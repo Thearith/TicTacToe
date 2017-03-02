@@ -3,7 +3,7 @@
 
 TicTacToe developed in React Native
 
-Stack:
+**Stack:**
 
 1. React Native
 2. Redux
