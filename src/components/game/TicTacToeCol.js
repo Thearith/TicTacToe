@@ -6,6 +6,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
+import { SIZE } from '../../constants/dimens';
 import { X_PLAYER, O_PLAYER } from '../../constants/constants';
 
 const TicTacToeCol = ({
@@ -30,8 +31,8 @@ const TicTacToeCol = ({
 
 const styles = StyleSheet.create({
   default: {
-    height: 75,
-    width: 75,
+    height: SIZE,
+    width: SIZE,
     margin: 3,
     borderRadius: 5,
     justifyContent: 'center',

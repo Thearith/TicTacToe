@@ -116,14 +116,18 @@ function isPlayerWinning(scores = {}, player) {
           .filter(index => scores[index] === player)
           .map(str => parseInt(str));
 
-  const isStraightRow = isSuperSet(playerPos, [0, 1, 2]) ||
-                      isSuperSet(playerPos, [3, 4, 5]) ||
-                      isSuperSet(playerPos, [6, 7, 8]);
-  const isStraightCol = isSuperSet(playerPos, [0, 3, 6]) ||
-                      isSuperSet(playerPos, [1, 4, 7]) ||
-                      isSuperSet(playerPos, [2, 5, 8]);
-  const isStraightDiag = isSuperSet(playerPos, [0, 4, 8]) ||
-                      isSuperSet(playerPos, [2, 4, 6]);
+  const isStraightRow = [...Array(GAME_SIZE)]
+                  .some((_, index) => {
+                    const checkList = constructRowCheckList(index, GAME_SIZE);
+                    return isSuperSet(playerPos, checkList);
+                  });
+  const isStraightCol = [...Array(GAME_SIZE)]
+                  .some((_, index) => {
+                    const checkList = constructColCheckList(index, GAME_SIZE);
+                    return isSuperSet(playerPos, checkList);
+                  });
+  const isStraightDiag = isSuperSet(playerPos, constructDiagCheckList(1, GAME_SIZE)) ||
+                      isSuperSet(playerPos, constructDiagCheckList(-1, GAME_SIZE));
 
   return isStraightRow || isStraightCol || isStraightDiag;
 }
@@ -134,6 +138,21 @@ function isSuperSet(arr1, arr2) {
       var numIn2 = arr2.filter(function(el) { return el === val;  }).length;
       return numIn1 === numIn2;
     });
+}
+
+function constructRowCheckList(index, size) {
+  return [...Array(size)].map((_, i) =>
+        size * index + i);
+}
+
+function constructColCheckList(index, size) {
+  return [...Array(size)].map((_, i) =>
+        size * i + index);
+}
+
+function constructDiagCheckList(dir, size) {
+  return [...Array(size)].map((_, i) =>
+        (size + dir) * i);
 }
 
 /**

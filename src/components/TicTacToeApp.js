@@ -19,11 +19,12 @@ const TicTacToeApp = ({
       {winner !== NO_WINNER || isDraw ?
         <GameOverDialog winner={winner} isDraw={isDraw}/>
         :
-        <View style={styles.gameContainer}>
-          <GameStatistics style={styles.statContainer} />
-          <TicTacToeCont style={styles.ticContainer}/>
-        </View>
+        <View />
       }
+      <View style={styles.gameContainer}>
+        <GameStatistics style={styles.statContainer} />
+        <TicTacToeCont style={styles.ticContainer}/>
+      </View>
     </View>
 );
 
